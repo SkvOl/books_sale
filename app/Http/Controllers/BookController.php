@@ -59,7 +59,7 @@ class BookController extends Controller{
 
         $books = Book::with('authors')->where('quantity', '>', 0);
 
-        if($request->photo == 1){
+        if(isset($request->photo) AND $request->photo == 1){
             /* Хоть у одного автора есть фото */
             $books = Book::whereHas('authors_with_photo')->with('authors')
             ->where('quantity', '>', 0);
@@ -69,7 +69,7 @@ class BookController extends Controller{
             $books = Book::withCount('sales')->with('authors')
             ->where('quantity', '>', 0)->orderBy('sales_count', $request->sale_sort);
         }
-        elseif(isset($request->popular)){
+        elseif(isset($request->popular) AND $request->popular = 1){
             /* Вывод только популярных книг у которых автор с рейтингом больше 75 либо количество продаж больше 3 */
             $books = Book::whereHas('authors_popular')->orWhereHas('book_popular_today')->with('authors')
             ->where('quantity', '>', 0);

@@ -30,63 +30,40 @@ class EndpointTest extends TestCase{
 
     public function test_all_endpoints(): void
     {
+        $this->createAll();
+        $this->getAll();
+        $this->changeAll();
+        $this->deleteAll();
+    }
+
+    private function createAll(): void
+    {
         $this->authors_post();
         $this->books_post();
         $this->books_buy();
+    }
 
-
+    private function getAll(): void
+    {
         $this->authors_get();
         $this->books_get();
         $this->buyers_get();
         $this->sales_get();
-        
+    }
 
+    private function changeAll(): void
+    {
         $this->authors_put();
         $this->books_put();
         $this->buyers_put();
         $this->sales_put();
+    }
 
-
+    private function deleteAll(): void
+    {
         $this->authors_delete();
         $this->books_delete();
         $this->buyers_delete();
         $this->sales_delete();
     }
-
-    
-    // public function test_authors(): void
-    // {
-    //     $this->authors_post();
-    //     $this->authors_get();
-    //     $this->authors_put();
-    //     $this->authors_delete();
-    // }
-
-    
-    // public function test_books(): void
-    // {
-    //     $this->books_post();
-    //     $this->books_get();
-    //     $this->books_put();
-    //     $this->books_delete();
-
-    //     $this->books_buy();
-    // }
-
-    
-    
-    // public function test_buyers(): void
-    // {
-    //     $this->buyers_get();
-    //     $this->buyers_put();
-    //     $this->buyers_delete();
-    // }
-
-    
-    // public function test_sales(): void
-    // {
-    //     $this->sales_get();
-    //     $this->sales_put();
-    //     $this->sales_delete();
-    // }
 }

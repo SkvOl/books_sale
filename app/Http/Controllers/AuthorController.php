@@ -1,6 +1,8 @@
 <?php
 namespace App\Http\Controllers;
 
+use Illuminate\Database\Eloquent\Builder;
+use Illuminate\Support\Facades\Schema;
 use App\Http\Controllers\Controller;
 use Illuminate\Support\Facades\DB;
 use OpenApi\Attributes as OAT;
@@ -39,9 +41,17 @@ class AuthorController extends Controller{
         ],
     )]
     public function index(Request $request){
-        $author = Author::select()->paginate(perPage: env('PER_PAGE'), page: $request->page);
+        $author = Author::select();
 
-        return self::response($author);
+        if(isset($request->search)) {
+            $author = self::searchAuthors($author, $request);
+        }
+
+        if(isset($request->sort_item) AND isset($request->sort_type) AND !isset($request->sale_sort)){
+            $author = $author->orderBy($request->sort_item, $request->sort_type);
+        }
+
+        return self::response($author->paginate(perPage: env('PER_PAGE'), page: $request->page));
     }
 
     #[OAT\Get(
@@ -181,5 +191,32 @@ class AuthorController extends Controller{
         $author::destroy($author->id);
 
         return self::response([]);
+    }
+
+    /**
+     * Поиск автора у которой есть подстрока request->search
+     * 
+     * @param Book $authors
+     * @param Request $request
+     * @return Builder
+     */
+    private static function searchAuthors($authors, $request)
+    {
+        return $authors->where(function (Builder $query) use ($request) {
+            $columns = Schema::getColumnListing('authors');
+            $explode  = explode(' ', $request->search);
+
+            if(count($explode) == 1){
+                foreach ($columns as $column) {
+                    foreach ($explode as $value) {
+                        $query->orWhereLike($column, "%{$explode[0]}%");
+                    }
+                }
+            }
+            else{
+                $query->WhereLike('last_name', "%{$explode[0]}%");
+                $query->WhereLike('first_name', "%{$explode[1]}%");
+            }
+        });
     }
 }

@@ -22,16 +22,23 @@ return Application::configure(basePath: dirname(__DIR__))
         ]);
     })
     ->withExceptions(function (Exceptions $exceptions) {
-        $exceptions->render(function (Throwable $throwable) {
-            $statusCode = method_exists($throwable, 'getStatusCode') ? $throwable->getStatusCode() : 500;
+        if(isset($_SERVER['REQUEST_URI']) AND str_contains($_SERVER['REQUEST_URI'], '/api')){
+            
+            
+            $exceptions->render(function (Throwable $throwable) {
+                $statusCode = method_exists($throwable, 'getStatusCode') ? $throwable->getStatusCode() : 500;
+    
+                return Response::response([
+                    'Message'=>$throwable->getMessage(),
+                    'Info'=>[
+                        // 'trace'=>$throwable->getTrace(),
+                        'line'=>$throwable->getLine(),
+                        'file'=>$throwable->getFile(),
+                    ]
+                ], $statusCode);
+            });
+        }
 
-            return Response::response([
-                'Message'=>$throwable->getMessage(),
-                'Info'=>[
-                    // 'trace'=>$throwable->getTrace(),
-                    'line'=>$throwable->getLine(),
-                    'file'=>$throwable->getFile(),
-                ]
-            ], $statusCode);
-        });
+
+       
     })->create();
