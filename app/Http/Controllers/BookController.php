@@ -6,6 +6,7 @@ use Illuminate\Support\Facades\Schema;
 use App\Http\Controllers\Controller;
 use Illuminate\Support\Facades\DB;
 use App\Events\BookUpdateEvent;
+use OpenApi\Attributes as OAT;
 use Illuminate\Http\Request;
 use App\Events\SaleEvent;
 use App\Models\Author;
@@ -16,6 +17,44 @@ use App\Models\Sale;
 
 class BookController extends Controller{
 
+    #[OAT\Get(
+        path: '/books',
+        summary: 'Получение списка не проданных книг',
+        description: 'Получение списка не проданных книг',
+        tags: ['books'],
+        responses: [
+            new OAT\Response(
+                response: 200,
+                description: 'Успешно',
+                content: new OAT\JsonContent(properties: [
+                    new OAT\Property(property: 'status', type: 'string', format: 'string', example: 'Successfully'),
+                    new OAT\Property(property: 'paginator', ref: '#/components/schemas/Paginator'),
+                    new OAT\Property(property: 'data', type: 'array', items: new OAT\Items(
+                        properties: [
+                            new OAT\Property(property: 'id', type: 'int', format: 'int', example: '1'),
+                            new OAT\Property(property: 'title', type: 'string', format: 'string', example: 'text'),
+                            new OAT\Property(property: 'description', type: 'string', format: 'string', example: 'text'),
+                            new OAT\Property(property: 'cover_url', type: 'string', format: 'url', example: 'http://rodriguez.com/aut-similique-laudantium-qui-assumenda-ducimus-quisquam'),
+                            new OAT\Property(property: 'price', type: 'float', format: 'float', example: '1.2'),
+                            new OAT\Property(property: 'quantity', type: 'int', format: 'int', example: '1'),
+                            new OAT\Property(property: 'authors', type: 'array', items: new OAT\Items(
+                                properties: [
+                                    new OAT\Property(property: 'id', type: 'int', format: 'int', example: '1'),
+                                    new OAT\Property(property: 'first_name', type: 'string', format: 'first name', example: 'Oleg'),
+                                    new OAT\Property(property: 'last_name', type: 'string', format: 'last name', example: 'Oleg'),
+                                    new OAT\Property(property: 'rank', type: 'float', format: 'float', example: '1.24'),
+                                    new OAT\Property(property: 'avatar_url', type: 'string', format: 'url', example: 'http://rodriguez.com/aut-similique-laudantium-qui-assumenda-ducimus-quisquam'),
+                                ]
+                            )),
+                        ]
+                    ))
+                ])
+            ),
+        ],
+        parameters: [
+            new OAT\Parameter(name: 'page', parameter: 'page', description: 'Текущая страница', in: 'query', required: false, deprecated: false, allowEmptyValue: true),
+        ],
+    )]
     public function index(Request $request){
 
         $books = Book::with('authors')->where('quantity', '>', 0);
@@ -50,10 +89,85 @@ class BookController extends Controller{
         return self::response($books->paginate(perPage: env('PER_PAGE'), page: $request->page));
     }
 
+    #[OAT\Get(
+        path: '/books/{id}',
+        summary: 'Получение одной книги',
+        description: 'Получение одной книги',
+        tags: ['books'],
+        responses: [
+            new OAT\Response(
+                response: 200,
+                description: 'Успешно',
+                content: new OAT\JsonContent(properties: [
+                    new OAT\Property(property: 'status', type: 'string', format: 'string', example: 'Successfully'),
+                    new OAT\Property(property: 'data', type: 'object',
+                        properties: [
+                            new OAT\Property(property: 'id', type: 'int', format: 'int', example: '1'),
+                            new OAT\Property(property: 'title', type: 'string', format: 'string', example: 'text'),
+                            new OAT\Property(property: 'description', type: 'string', format: 'string', example: 'text'),
+                            new OAT\Property(property: 'cover_url', type: 'string', format: 'url', example: 'http://rodriguez.com/aut-similique-laudantium-qui-assumenda-ducimus-quisquam'),
+                            new OAT\Property(property: 'price', type: 'float', format: 'float', example: '1.2'),
+                            new OAT\Property(property: 'quantity', type: 'int', format: 'int', example: '1'),
+                            new OAT\Property(property: 'authors', type: 'array', items: new OAT\Items(
+                                properties: [
+                                    new OAT\Property(property: 'id', type: 'int', format: 'int', example: '1'),
+                                    new OAT\Property(property: 'first_name', type: 'string', format: 'first name', example: 'Oleg'),
+                                    new OAT\Property(property: 'last_name', type: 'string', format: 'last name', example: 'Oleg'),
+                                    new OAT\Property(property: 'rank', type: 'float', format: 'float', example: '1.24'),
+                                    new OAT\Property(property: 'avatar_url', type: 'string', format: 'url', example: 'http://rodriguez.com/aut-similique-laudantium-qui-assumenda-ducimus-quisquam'),
+                                ]
+                            )),
+                        ]
+                    )
+                ])
+            ),
+        ],
+        parameters: [
+            new OAT\Parameter(name: 'id', parameter: 'id', description: 'Идентификатор книги', in: 'query', required: true, deprecated: false, allowEmptyValue: true),
+        ],
+    )]
     public function show(string $id){
         return self::response(Book::with('authors')->find($id));
     }
     
+    #[OAT\Put(
+        path: '/books/{id}',
+        summary: 'Изменение книги',
+        description: 'Изменение книги',
+        tags: ['books'],
+        responses: [
+            new OAT\Response(
+                response: 200,
+                description: 'Успешно',
+                content: new OAT\JsonContent(properties: [
+                    new OAT\Property(property: 'status', type: 'string', format: 'string', example: 'Successfully'),
+                    new OAT\Property(property: 'data', type: 'array', items: new OAT\Items(
+                        properties: [
+                            new OAT\Property(property: 'id', type: 'int', format: 'int', example: '1'),
+                            new OAT\Property(property: 'title', type: 'string', format: 'string', example: 'text'),
+                            new OAT\Property(property: 'description', type: 'string', format: 'string', example: 'text'),
+                            new OAT\Property(property: 'cover_url', type: 'string', format: 'url', example: 'http://rodriguez.com/aut-similique-laudantium-qui-assumenda-ducimus-quisquam'),
+                            new OAT\Property(property: 'price', type: 'float', format: 'float', example: '1.2'),
+                            new OAT\Property(property: 'quantity', type: 'int', format: 'int', example: '1'),
+                        ]
+                    ))
+                ])
+            ),
+        ],
+        parameters: [
+            new OAT\RequestBody(
+                required: true,
+                content: new OAT\JsonContent(properties: [
+                    new OAT\Property(property: 'title', type: 'string', format: 'string', example: 'text'),
+                    new OAT\Property(property: 'description', type: 'string', format: 'string', example: 'text'),
+                    new OAT\Property(property: 'cover_url', type: 'string', format: 'url', example: 'http://rodriguez.com/aut-similique-laudantium-qui-assumenda-ducimus-quisquam'),
+                    new OAT\Property(property: 'price', type: 'float', format: 'float', example: '1.2'),
+                    new OAT\Property(property: 'quantity', type: 'int', format: 'int', example: '1'),
+                ]),
+            ),
+            new OAT\Parameter(name: 'id', parameter: 'id', description: 'Идентификатор книги', in: 'query', required: true, deprecated: false, allowEmptyValue: true),
+        ]
+    )]
     public function update(Request $request, string $id){
         $book = Book::find($id);
 
@@ -63,6 +177,41 @@ class BookController extends Controller{
         return self::response($book->toArray());
     }
 
+    #[OAT\Post(
+        path: '/books',
+        summary: 'Создание книги',
+        description: 'Создание книги',
+        tags: ['books'],
+        responses: [
+            new OAT\Response(
+                response: 200,
+                description: 'Успешно',
+                content: new OAT\JsonContent(properties: [
+                    new OAT\Property(property: 'status', type: 'string', format: 'string', example: 'Successfully'),
+                    new OAT\Property(property: 'data', type: 'array', items: new OAT\Items(
+                        properties: [
+                            new OAT\Property(property: 'id', type: 'int', format: 'int', example: '1'),
+                            new OAT\Property(property: 'title', type: 'string', format: 'string', example: 'text'),
+                            new OAT\Property(property: 'description', type: 'string', format: 'string', example: 'text'),
+                            new OAT\Property(property: 'cover_url', type: 'string', format: 'url', example: 'http://rodriguez.com/aut-similique-laudantium-qui-assumenda-ducimus-quisquam'),
+                            new OAT\Property(property: 'price', type: 'float', format: 'float', example: '1.2'),
+                            new OAT\Property(property: 'quantity', type: 'int', format: 'int', example: '1'),
+                        ]
+                    ))
+                ])
+            ),
+        ],
+        parameters: [new OAT\RequestBody(
+            required: true,
+            content: new OAT\JsonContent(properties: [
+                new OAT\Property(property: 'title', type: 'string', format: 'string', example: 'text'),
+                new OAT\Property(property: 'description', type: 'string', format: 'string', example: 'text'),
+                new OAT\Property(property: 'cover_url', type: 'string', format: 'url', example: 'http://rodriguez.com/aut-similique-laudantium-qui-assumenda-ducimus-quisquam'),
+                new OAT\Property(property: 'price', type: 'float', format: 'float', example: '1.2'),
+                new OAT\Property(property: 'quantity', type: 'int', format: 'int', example: '1'),
+            ])
+        )]
+    )]
     public function store(Request $request){
         throw_if(!isset($request->authors), new \Exception('Authors is missing'), 400);
         $book = collect();
@@ -83,12 +232,42 @@ class BookController extends Controller{
         return self::response($book->toArray());
     }
     
+    #[OAT\Delete(
+        path: '/books/{id}',
+        summary: 'Удаление книги',
+        description: 'Удаление книги',
+        tags: ['books'],
+        responses: [
+            new OAT\Response(
+                response: 200,
+                description: 'Успешно',
+            ),
+        ],
+        parameters: [
+            new OAT\Parameter(name: 'id', parameter: 'id', description: 'Идентификатор книги', in: 'query', required: true, deprecated: false, allowEmptyValue: true),
+        ],
+    )]
     public function destroy(Book $book){ 
         $book::destroy($book->id);
 
         return self::response([]);
     }
 
+    #[OAT\Post(
+        path: '/books/{id}/buy',
+        summary: 'Покупка книги',
+        description: 'Покупка книги',
+        tags: ['books'],
+        responses: [
+            new OAT\Response(
+                response: 200,
+                description: 'Успешно',
+            ),
+        ],
+        parameters: [
+            new OAT\Parameter(name: 'id', parameter: 'id', description: 'Идентификатор книги', in: 'query', required: true, deprecated: false, allowEmptyValue: true),
+        ],
+    )]
     public function buy(Book $book, Request $request){
         DB::transaction(function() use ($book, $request) {
             $book->decrement('quantity'); 

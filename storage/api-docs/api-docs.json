@@ -1,0 +1,1814 @@
+{
+    "openapi": "3.0.0",
+    "info": {
+        "title": "Book sale",
+        "description": "Простой сервис по пробаже книг",
+        "version": "1"
+    },
+    "paths": {
+        "/authors": {
+            "get": {
+                "tags": [
+                    "authors"
+                ],
+                "summary": "Получение списка authors",
+                "description": "Получение списка authors",
+                "operationId": "33b4ca0e528a8b6298d9942781a0c85a",
+                "parameters": [
+                    {
+                        "parameter": "page",
+                        "name": "page",
+                        "in": "query",
+                        "description": "Текущая страница",
+                        "required": false,
+                        "deprecated": false,
+                        "allowEmptyValue": true
+                    }
+                ],
+                "responses": {
+                    "200": {
+                        "description": "Успешно",
+                        "content": {
+                            "application/json": {
+                                "schema": {
+                                    "properties": {
+                                        "status": {
+                                            "type": "string",
+                                            "format": "string",
+                                            "example": "Successfully"
+                                        },
+                                        "paginator": {
+                                            "$ref": "#/components/schemas/Paginator"
+                                        },
+                                        "data": {
+                                            "type": "array",
+                                            "items": {
+                                                "properties": {
+                                                    "id": {
+                                                        "type": "integer",
+                                                        "format": "int",
+                                                        "example": "1"
+                                                    },
+                                                    "first_name": {
+                                                        "type": "string",
+                                                        "format": "first name",
+                                                        "example": "Oleg"
+                                                    },
+                                                    "last_name": {
+                                                        "type": "string",
+                                                        "format": "last name",
+                                                        "example": "Oleg"
+                                                    },
+                                                    "rank": {
+                                                        "type": "number",
+                                                        "format": "float",
+                                                        "example": "1.24"
+                                                    },
+                                                    "avatar_url": {
+                                                        "type": "string",
+                                                        "format": "url",
+                                                        "example": "http://rodriguez.com/aut-similique-laudantium-qui-assumenda-ducimus-quisquam"
+                                                    }
+                                                },
+                                                "type": "object"
+                                            }
+                                        }
+                                    },
+                                    "type": "object"
+                                }
+                            }
+                        }
+                    }
+                }
+            },
+            "post": {
+                "tags": [
+                    "authors"
+                ],
+                "summary": "Создание автора",
+                "description": "Создание автора",
+                "operationId": "d998cf74685b2e9609bcd48ab986f678",
+                "requestBody": {
+                    "required": true,
+                    "content": {
+                        "application/json": {
+                            "schema": {
+                                "properties": {
+                                    "first_name": {
+                                        "type": "string",
+                                        "format": "first name",
+                                        "example": "Oleg"
+                                    },
+                                    "last_name": {
+                                        "type": "string",
+                                        "format": "last name",
+                                        "example": "Oleg"
+                                    },
+                                    "rank": {
+                                        "type": "number",
+                                        "format": "float",
+                                        "example": "1.24"
+                                    },
+                                    "avatar_url": {
+                                        "type": "string",
+                                        "format": "url",
+                                        "example": "http://rodriguez.com/aut-similique-laudantium-qui-assumenda-ducimus-quisquam"
+                                    }
+                                },
+                                "type": "object"
+                            }
+                        }
+                    }
+                },
+                "responses": {
+                    "200": {
+                        "description": "Успешно",
+                        "content": {
+                            "application/json": {
+                                "schema": {
+                                    "properties": {
+                                        "status": {
+                                            "type": "string",
+                                            "format": "string",
+                                            "example": "Successfully"
+                                        },
+                                        "data": {
+                                            "type": "array",
+                                            "items": {
+                                                "properties": {
+                                                    "id": {
+                                                        "type": "integer",
+                                                        "format": "int",
+                                                        "example": "1"
+                                                    },
+                                                    "first_name": {
+                                                        "type": "string",
+                                                        "format": "first name",
+                                                        "example": "Oleg"
+                                                    },
+                                                    "last_name": {
+                                                        "type": "string",
+                                                        "format": "last name",
+                                                        "example": "Oleg"
+                                                    },
+                                                    "rank": {
+                                                        "type": "number",
+                                                        "format": "float",
+                                                        "example": "1.24"
+                                                    },
+                                                    "avatar_url": {
+                                                        "type": "string",
+                                                        "format": "url",
+                                                        "example": "http://rodriguez.com/aut-similique-laudantium-qui-assumenda-ducimus-quisquam"
+                                                    }
+                                                },
+                                                "type": "object"
+                                            }
+                                        }
+                                    },
+                                    "type": "object"
+                                }
+                            }
+                        }
+                    }
+                }
+            }
+        },
+        "/authors/{id}": {
+            "get": {
+                "tags": [
+                    "authors"
+                ],
+                "summary": "Получение одного автора",
+                "description": "Получение одного автора",
+                "operationId": "5317eb225dd93ee043c24cfacda9f26d",
+                "parameters": [
+                    {
+                        "parameter": "id",
+                        "name": "id",
+                        "in": "query",
+                        "description": "Идентификатор автора",
+                        "required": true,
+                        "deprecated": false,
+                        "allowEmptyValue": true
+                    }
+                ],
+                "responses": {
+                    "200": {
+                        "description": "Успешно",
+                        "content": {
+                            "application/json": {
+                                "schema": {
+                                    "properties": {
+                                        "status": {
+                                            "type": "string",
+                                            "format": "string",
+                                            "example": "Successfully"
+                                        },
+                                        "data": {
+                                            "properties": {
+                                                "id": {
+                                                    "type": "integer",
+                                                    "format": "int",
+                                                    "example": "1"
+                                                },
+                                                "first_name": {
+                                                    "type": "string",
+                                                    "format": "first name",
+                                                    "example": "Oleg"
+                                                },
+                                                "last_name": {
+                                                    "type": "string",
+                                                    "format": "last name",
+                                                    "example": "Oleg"
+                                                },
+                                                "rank": {
+                                                    "type": "number",
+                                                    "format": "float",
+                                                    "example": "1.24"
+                                                },
+                                                "avatar_url": {
+                                                    "type": "string",
+                                                    "format": "url",
+                                                    "example": "http://rodriguez.com/aut-similique-laudantium-qui-assumenda-ducimus-quisquam"
+                                                }
+                                            },
+                                            "type": "object"
+                                        }
+                                    },
+                                    "type": "object"
+                                }
+                            }
+                        }
+                    }
+                }
+            },
+            "put": {
+                "tags": [
+                    "authors"
+                ],
+                "summary": "Изменение данных автора",
+                "description": "Изменение данных автора",
+                "operationId": "54818ef139366ae08ef5747f7c9d9a36",
+                "parameters": [
+                    {
+                        "parameter": "id",
+                        "name": "id",
+                        "in": "query",
+                        "description": "Идентификатор автора",
+                        "required": true,
+                        "deprecated": false,
+                        "allowEmptyValue": true
+                    }
+                ],
+                "requestBody": {
+                    "required": true,
+                    "content": {
+                        "application/json": {
+                            "schema": {
+                                "properties": {
+                                    "first_name": {
+                                        "type": "string",
+                                        "format": "first name",
+                                        "example": "Oleg"
+                                    },
+                                    "last_name": {
+                                        "type": "string",
+                                        "format": "last name",
+                                        "example": "Oleg"
+                                    },
+                                    "rank": {
+                                        "type": "number",
+                                        "format": "float",
+                                        "example": "1.24"
+                                    },
+                                    "avatar_url": {
+                                        "type": "string",
+                                        "format": "url",
+                                        "example": "http://rodriguez.com/aut-similique-laudantium-qui-assumenda-ducimus-quisquam"
+                                    }
+                                },
+                                "type": "object"
+                            }
+                        }
+                    }
+                },
+                "responses": {
+                    "200": {
+                        "description": "Успешно",
+                        "content": {
+                            "application/json": {
+                                "schema": {
+                                    "properties": {
+                                        "status": {
+                                            "type": "string",
+                                            "format": "string",
+                                            "example": "Successfully"
+                                        },
+                                        "data": {
+                                            "type": "array",
+                                            "items": {
+                                                "properties": {
+                                                    "id": {
+                                                        "type": "integer",
+                                                        "format": "int",
+                                                        "example": "1"
+                                                    },
+                                                    "first_name": {
+                                                        "type": "string",
+                                                        "format": "first name",
+                                                        "example": "Oleg"
+                                                    },
+                                                    "last_name": {
+                                                        "type": "string",
+                                                        "format": "last name",
+                                                        "example": "Oleg"
+                                                    },
+                                                    "rank": {
+                                                        "type": "number",
+                                                        "format": "float",
+                                                        "example": "1.24"
+                                                    },
+                                                    "avatar_url": {
+                                                        "type": "string",
+                                                        "format": "url",
+                                                        "example": "http://rodriguez.com/aut-similique-laudantium-qui-assumenda-ducimus-quisquam"
+                                                    }
+                                                },
+                                                "type": "object"
+                                            }
+                                        }
+                                    },
+                                    "type": "object"
+                                }
+                            }
+                        }
+                    }
+                }
+            },
+            "delete": {
+                "tags": [
+                    "authors"
+                ],
+                "summary": "Удаление автора",
+                "description": "Удаление автора",
+                "operationId": "c8d794bbc8f06854b38ce720c4395db8",
+                "parameters": [
+                    {
+                        "parameter": "id",
+                        "name": "id",
+                        "in": "query",
+                        "description": "Идентификатор автора",
+                        "required": true,
+                        "deprecated": false,
+                        "allowEmptyValue": true
+                    }
+                ],
+                "responses": {
+                    "200": {
+                        "description": "Успешно"
+                    }
+                }
+            }
+        },
+        "/books": {
+            "get": {
+                "tags": [
+                    "books"
+                ],
+                "summary": "Получение списка не проданных книг",
+                "description": "Получение списка не проданных книг",
+                "operationId": "28b9632495ac5f6f66b2e52001d510e6",
+                "parameters": [
+                    {
+                        "parameter": "page",
+                        "name": "page",
+                        "in": "query",
+                        "description": "Текущая страница",
+                        "required": false,
+                        "deprecated": false,
+                        "allowEmptyValue": true
+                    }
+                ],
+                "responses": {
+                    "200": {
+                        "description": "Успешно",
+                        "content": {
+                            "application/json": {
+                                "schema": {
+                                    "properties": {
+                                        "status": {
+                                            "type": "string",
+                                            "format": "string",
+                                            "example": "Successfully"
+                                        },
+                                        "paginator": {
+                                            "$ref": "#/components/schemas/Paginator"
+                                        },
+                                        "data": {
+                                            "type": "array",
+                                            "items": {
+                                                "properties": {
+                                                    "id": {
+                                                        "type": "integer",
+                                                        "format": "int",
+                                                        "example": "1"
+                                                    },
+                                                    "title": {
+                                                        "type": "string",
+                                                        "format": "string",
+                                                        "example": "text"
+                                                    },
+                                                    "description": {
+                                                        "type": "string",
+                                                        "format": "string",
+                                                        "example": "text"
+                                                    },
+                                                    "cover_url": {
+                                                        "type": "string",
+                                                        "format": "url",
+                                                        "example": "http://rodriguez.com/aut-similique-laudantium-qui-assumenda-ducimus-quisquam"
+                                                    },
+                                                    "price": {
+                                                        "type": "number",
+                                                        "format": "float",
+                                                        "example": "1.2"
+                                                    },
+                                                    "quantity": {
+                                                        "type": "integer",
+                                                        "format": "int",
+                                                        "example": "1"
+                                                    },
+                                                    "authors": {
+                                                        "type": "array",
+                                                        "items": {
+                                                            "properties": {
+                                                                "id": {
+                                                                    "type": "integer",
+                                                                    "format": "int",
+                                                                    "example": "1"
+                                                                },
+                                                                "first_name": {
+                                                                    "type": "string",
+                                                                    "format": "first name",
+                                                                    "example": "Oleg"
+                                                                },
+                                                                "last_name": {
+                                                                    "type": "string",
+                                                                    "format": "last name",
+                                                                    "example": "Oleg"
+                                                                },
+                                                                "rank": {
+                                                                    "type": "number",
+                                                                    "format": "float",
+                                                                    "example": "1.24"
+                                                                },
+                                                                "avatar_url": {
+                                                                    "type": "string",
+                                                                    "format": "url",
+                                                                    "example": "http://rodriguez.com/aut-similique-laudantium-qui-assumenda-ducimus-quisquam"
+                                                                }
+                                                            },
+                                                            "type": "object"
+                                                        }
+                                                    }
+                                                },
+                                                "type": "object"
+                                            }
+                                        }
+                                    },
+                                    "type": "object"
+                                }
+                            }
+                        }
+                    }
+                }
+            },
+            "post": {
+                "tags": [
+                    "books"
+                ],
+                "summary": "Создание книги",
+                "description": "Создание книги",
+                "operationId": "b10f5fe35eefa47e974dd4b333d870b1",
+                "requestBody": {
+                    "required": true,
+                    "content": {
+                        "application/json": {
+                            "schema": {
+                                "properties": {
+                                    "title": {
+                                        "type": "string",
+                                        "format": "string",
+                                        "example": "text"
+                                    },
+                                    "description": {
+                                        "type": "string",
+                                        "format": "string",
+                                        "example": "text"
+                                    },
+                                    "cover_url": {
+                                        "type": "string",
+                                        "format": "url",
+                                        "example": "http://rodriguez.com/aut-similique-laudantium-qui-assumenda-ducimus-quisquam"
+                                    },
+                                    "price": {
+                                        "type": "number",
+                                        "format": "float",
+                                        "example": "1.2"
+                                    },
+                                    "quantity": {
+                                        "type": "integer",
+                                        "format": "int",
+                                        "example": "1"
+                                    }
+                                },
+                                "type": "object"
+                            }
+                        }
+                    }
+                },
+                "responses": {
+                    "200": {
+                        "description": "Успешно",
+                        "content": {
+                            "application/json": {
+                                "schema": {
+                                    "properties": {
+                                        "status": {
+                                            "type": "string",
+                                            "format": "string",
+                                            "example": "Successfully"
+                                        },
+                                        "data": {
+                                            "type": "array",
+                                            "items": {
+                                                "properties": {
+                                                    "id": {
+                                                        "type": "integer",
+                                                        "format": "int",
+                                                        "example": "1"
+                                                    },
+                                                    "title": {
+                                                        "type": "string",
+                                                        "format": "string",
+                                                        "example": "text"
+                                                    },
+                                                    "description": {
+                                                        "type": "string",
+                                                        "format": "string",
+                                                        "example": "text"
+                                                    },
+                                                    "cover_url": {
+                                                        "type": "string",
+                                                        "format": "url",
+                                                        "example": "http://rodriguez.com/aut-similique-laudantium-qui-assumenda-ducimus-quisquam"
+                                                    },
+                                                    "price": {
+                                                        "type": "number",
+                                                        "format": "float",
+                                                        "example": "1.2"
+                                                    },
+                                                    "quantity": {
+                                                        "type": "integer",
+                                                        "format": "int",
+                                                        "example": "1"
+                                                    }
+                                                },
+                                                "type": "object"
+                                            }
+                                        }
+                                    },
+                                    "type": "object"
+                                }
+                            }
+                        }
+                    }
+                }
+            }
+        },
+        "/books/{id}": {
+            "get": {
+                "tags": [
+                    "books"
+                ],
+                "summary": "Получение одной книги",
+                "description": "Получение одной книги",
+                "operationId": "e94109dcb4f4d40b58a210b43d94016d",
+                "parameters": [
+                    {
+                        "parameter": "id",
+                        "name": "id",
+                        "in": "query",
+                        "description": "Идентификатор книги",
+                        "required": true,
+                        "deprecated": false,
+                        "allowEmptyValue": true
+                    }
+                ],
+                "responses": {
+                    "200": {
+                        "description": "Успешно",
+                        "content": {
+                            "application/json": {
+                                "schema": {
+                                    "properties": {
+                                        "status": {
+                                            "type": "string",
+                                            "format": "string",
+                                            "example": "Successfully"
+                                        },
+                                        "data": {
+                                            "properties": {
+                                                "id": {
+                                                    "type": "integer",
+                                                    "format": "int",
+                                                    "example": "1"
+                                                },
+                                                "title": {
+                                                    "type": "string",
+                                                    "format": "string",
+                                                    "example": "text"
+                                                },
+                                                "description": {
+                                                    "type": "string",
+                                                    "format": "string",
+                                                    "example": "text"
+                                                },
+                                                "cover_url": {
+                                                    "type": "string",
+                                                    "format": "url",
+                                                    "example": "http://rodriguez.com/aut-similique-laudantium-qui-assumenda-ducimus-quisquam"
+                                                },
+                                                "price": {
+                                                    "type": "number",
+                                                    "format": "float",
+                                                    "example": "1.2"
+                                                },
+                                                "quantity": {
+                                                    "type": "integer",
+                                                    "format": "int",
+                                                    "example": "1"
+                                                },
+                                                "authors": {
+                                                    "type": "array",
+                                                    "items": {
+                                                        "properties": {
+                                                            "id": {
+                                                                "type": "integer",
+                                                                "format": "int",
+                                                                "example": "1"
+                                                            },
+                                                            "first_name": {
+                                                                "type": "string",
+                                                                "format": "first name",
+                                                                "example": "Oleg"
+                                                            },
+                                                            "last_name": {
+                                                                "type": "string",
+                                                                "format": "last name",
+                                                                "example": "Oleg"
+                                                            },
+                                                            "rank": {
+                                                                "type": "number",
+                                                                "format": "float",
+                                                                "example": "1.24"
+                                                            },
+                                                            "avatar_url": {
+                                                                "type": "string",
+                                                                "format": "url",
+                                                                "example": "http://rodriguez.com/aut-similique-laudantium-qui-assumenda-ducimus-quisquam"
+                                                            }
+                                                        },
+                                                        "type": "object"
+                                                    }
+                                                }
+                                            },
+                                            "type": "object"
+                                        }
+                                    },
+                                    "type": "object"
+                                }
+                            }
+                        }
+                    }
+                }
+            },
+            "put": {
+                "tags": [
+                    "books"
+                ],
+                "summary": "Изменение книги",
+                "description": "Изменение книги",
+                "operationId": "7430c1078c3cb5da552b2fd50409f8ea",
+                "parameters": [
+                    {
+                        "parameter": "id",
+                        "name": "id",
+                        "in": "query",
+                        "description": "Идентификатор книги",
+                        "required": true,
+                        "deprecated": false,
+                        "allowEmptyValue": true
+                    }
+                ],
+                "requestBody": {
+                    "required": true,
+                    "content": {
+                        "application/json": {
+                            "schema": {
+                                "properties": {
+                                    "title": {
+                                        "type": "string",
+                                        "format": "string",
+                                        "example": "text"
+                                    },
+                                    "description": {
+                                        "type": "string",
+                                        "format": "string",
+                                        "example": "text"
+                                    },
+                                    "cover_url": {
+                                        "type": "string",
+                                        "format": "url",
+                                        "example": "http://rodriguez.com/aut-similique-laudantium-qui-assumenda-ducimus-quisquam"
+                                    },
+                                    "price": {
+                                        "type": "number",
+                                        "format": "float",
+                                        "example": "1.2"
+                                    },
+                                    "quantity": {
+                                        "type": "integer",
+                                        "format": "int",
+                                        "example": "1"
+                                    }
+                                },
+                                "type": "object"
+                            }
+                        }
+                    }
+                },
+                "responses": {
+                    "200": {
+                        "description": "Успешно",
+                        "content": {
+                            "application/json": {
+                                "schema": {
+                                    "properties": {
+                                        "status": {
+                                            "type": "string",
+                                            "format": "string",
+                                            "example": "Successfully"
+                                        },
+                                        "data": {
+                                            "type": "array",
+                                            "items": {
+                                                "properties": {
+                                                    "id": {
+                                                        "type": "integer",
+                                                        "format": "int",
+                                                        "example": "1"
+                                                    },
+                                                    "title": {
+                                                        "type": "string",
+                                                        "format": "string",
+                                                        "example": "text"
+                                                    },
+                                                    "description": {
+                                                        "type": "string",
+                                                        "format": "string",
+                                                        "example": "text"
+                                                    },
+                                                    "cover_url": {
+                                                        "type": "string",
+                                                        "format": "url",
+                                                        "example": "http://rodriguez.com/aut-similique-laudantium-qui-assumenda-ducimus-quisquam"
+                                                    },
+                                                    "price": {
+                                                        "type": "number",
+                                                        "format": "float",
+                                                        "example": "1.2"
+                                                    },
+                                                    "quantity": {
+                                                        "type": "integer",
+                                                        "format": "int",
+                                                        "example": "1"
+                                                    }
+                                                },
+                                                "type": "object"
+                                            }
+                                        }
+                                    },
+                                    "type": "object"
+                                }
+                            }
+                        }
+                    }
+                }
+            },
+            "delete": {
+                "tags": [
+                    "books"
+                ],
+                "summary": "Удаление книги",
+                "description": "Удаление книги",
+                "operationId": "41c44a46960ad1a921ba5bfbf16ea7b8",
+                "parameters": [
+                    {
+                        "parameter": "id",
+                        "name": "id",
+                        "in": "query",
+                        "description": "Идентификатор книги",
+                        "required": true,
+                        "deprecated": false,
+                        "allowEmptyValue": true
+                    }
+                ],
+                "responses": {
+                    "200": {
+                        "description": "Успешно"
+                    }
+                }
+            }
+        },
+        "/books/{id}/buy": {
+            "post": {
+                "tags": [
+                    "books"
+                ],
+                "summary": "Покупка книги",
+                "description": "Покупка книги",
+                "operationId": "1f85e8c8c6add52e9c4dc42f9f6cfd1f",
+                "parameters": [
+                    {
+                        "parameter": "id",
+                        "name": "id",
+                        "in": "query",
+                        "description": "Идентификатор книги",
+                        "required": true,
+                        "deprecated": false,
+                        "allowEmptyValue": true
+                    }
+                ],
+                "responses": {
+                    "200": {
+                        "description": "Успешно"
+                    }
+                }
+            }
+        },
+        "/buyers": {
+            "get": {
+                "tags": [
+                    "buyers"
+                ],
+                "summary": "Получение покупателей",
+                "description": "Получение покупателей",
+                "operationId": "5014dba2c4acb6b068bb829928f4587f",
+                "parameters": [
+                    {
+                        "parameter": "page",
+                        "name": "page",
+                        "in": "query",
+                        "description": "Текущая страница",
+                        "required": false,
+                        "deprecated": false,
+                        "allowEmptyValue": true
+                    }
+                ],
+                "responses": {
+                    "200": {
+                        "description": "Успешно",
+                        "content": {
+                            "application/json": {
+                                "schema": {
+                                    "properties": {
+                                        "status": {
+                                            "type": "string",
+                                            "format": "string",
+                                            "example": "Successfully"
+                                        },
+                                        "paginator": {
+                                            "$ref": "#/components/schemas/Paginator"
+                                        },
+                                        "data": {
+                                            "type": "array",
+                                            "items": {
+                                                "properties": {
+                                                    "id": {
+                                                        "type": "integer",
+                                                        "format": "int",
+                                                        "example": "1"
+                                                    },
+                                                    "name": {
+                                                        "type": "string",
+                                                        "format": "name",
+                                                        "example": "Oleg"
+                                                    },
+                                                    "email": {
+                                                        "type": "string",
+                                                        "format": "email",
+                                                        "example": "Oleg@mail"
+                                                    }
+                                                },
+                                                "type": "object"
+                                            }
+                                        }
+                                    },
+                                    "type": "object"
+                                }
+                            }
+                        }
+                    }
+                }
+            }
+        },
+        "/buyers/{id}": {
+            "get": {
+                "tags": [
+                    "buyers"
+                ],
+                "summary": "Получение одного покупателя",
+                "description": "Получение одного покупателя",
+                "operationId": "f6c84551762f58cae0c6a2701ca662eb",
+                "parameters": [
+                    {
+                        "parameter": "id",
+                        "name": "id",
+                        "in": "query",
+                        "description": "Идентификатор автора",
+                        "required": true,
+                        "deprecated": false,
+                        "allowEmptyValue": true
+                    }
+                ],
+                "responses": {
+                    "200": {
+                        "description": "Успешно",
+                        "content": {
+                            "application/json": {
+                                "schema": {
+                                    "properties": {
+                                        "status": {
+                                            "type": "string",
+                                            "format": "string",
+                                            "example": "Successfully"
+                                        },
+                                        "data": {
+                                            "properties": {
+                                                "id": {
+                                                    "type": "integer",
+                                                    "format": "int",
+                                                    "example": "1"
+                                                },
+                                                "name": {
+                                                    "type": "string",
+                                                    "format": "name",
+                                                    "example": "Oleg"
+                                                },
+                                                "email": {
+                                                    "type": "string",
+                                                    "format": "email",
+                                                    "example": "Oleg@mail"
+                                                }
+                                            },
+                                            "type": "object"
+                                        }
+                                    },
+                                    "type": "object"
+                                }
+                            }
+                        }
+                    }
+                }
+            },
+            "put": {
+                "tags": [
+                    "buyers"
+                ],
+                "summary": "Изменение данных покупателя",
+                "description": "Изменение данных покупателя",
+                "operationId": "7235f37abf51c860c77d5803a957c54b",
+                "parameters": [
+                    {
+                        "parameter": "id",
+                        "name": "id",
+                        "in": "query",
+                        "description": "Идентификатор автора",
+                        "required": true,
+                        "deprecated": false,
+                        "allowEmptyValue": true
+                    }
+                ],
+                "requestBody": {
+                    "required": true,
+                    "content": {
+                        "application/json": {
+                            "schema": {
+                                "properties": {
+                                    "name": {
+                                        "type": "string",
+                                        "format": "name",
+                                        "example": "Oleg"
+                                    },
+                                    "email": {
+                                        "type": "string",
+                                        "format": "email",
+                                        "example": "Oleg@mail"
+                                    }
+                                },
+                                "type": "object"
+                            }
+                        }
+                    }
+                },
+                "responses": {
+                    "200": {
+                        "description": "Успешно",
+                        "content": {
+                            "application/json": {
+                                "schema": {
+                                    "properties": {
+                                        "status": {
+                                            "type": "string",
+                                            "format": "string",
+                                            "example": "Successfully"
+                                        },
+                                        "data": {
+                                            "type": "array",
+                                            "items": {
+                                                "properties": {
+                                                    "id": {
+                                                        "type": "integer",
+                                                        "format": "int",
+                                                        "example": "1"
+                                                    },
+                                                    "name": {
+                                                        "type": "string",
+                                                        "format": "name",
+                                                        "example": "Oleg"
+                                                    },
+                                                    "email": {
+                                                        "type": "string",
+                                                        "format": "email",
+                                                        "example": "Oleg@mail"
+                                                    }
+                                                },
+                                                "type": "object"
+                                            }
+                                        }
+                                    },
+                                    "type": "object"
+                                }
+                            }
+                        }
+                    }
+                }
+            },
+            "delete": {
+                "tags": [
+                    "buyers"
+                ],
+                "summary": "Удаление покупателя",
+                "description": "Удаление покупателя",
+                "operationId": "488ea884f675eea0ad33ef4a51191861",
+                "parameters": [
+                    {
+                        "parameter": "id",
+                        "name": "id",
+                        "in": "query",
+                        "description": "Идентификатор автора",
+                        "required": true,
+                        "deprecated": false,
+                        "allowEmptyValue": true
+                    }
+                ],
+                "responses": {
+                    "200": {
+                        "description": "Успешно"
+                    }
+                }
+            }
+        },
+        "/sales": {
+            "get": {
+                "tags": [
+                    "sales"
+                ],
+                "summary": "Получение продаж",
+                "description": "Получение продаж",
+                "operationId": "9a52aea5bea0f084e08a91260f5eb957",
+                "parameters": [
+                    {
+                        "parameter": "page",
+                        "name": "page",
+                        "in": "query",
+                        "description": "Текущая страница",
+                        "required": false,
+                        "deprecated": false,
+                        "allowEmptyValue": true
+                    }
+                ],
+                "responses": {
+                    "200": {
+                        "description": "Успешно",
+                        "content": {
+                            "application/json": {
+                                "schema": {
+                                    "properties": {
+                                        "status": {
+                                            "type": "string",
+                                            "format": "string",
+                                            "example": "Successfully"
+                                        },
+                                        "paginator": {
+                                            "$ref": "#/components/schemas/Paginator"
+                                        },
+                                        "data": {
+                                            "type": "array",
+                                            "items": {
+                                                "properties": {
+                                                    "id": {
+                                                        "type": "integer",
+                                                        "format": "int",
+                                                        "example": "1"
+                                                    },
+                                                    "book_id": {
+                                                        "type": "integer",
+                                                        "format": "int",
+                                                        "example": "1"
+                                                    },
+                                                    "client_id": {
+                                                        "type": "integer",
+                                                        "format": "int",
+                                                        "example": "1"
+                                                    },
+                                                    "price": {
+                                                        "type": "number",
+                                                        "format": "float",
+                                                        "example": "1.2"
+                                                    },
+                                                    "created_at": {
+                                                        "type": "string",
+                                                        "format": "TIMESTAMP",
+                                                        "example": "2025-06-22T09:02:11.000000Z"
+                                                    }
+                                                },
+                                                "type": "object"
+                                            }
+                                        }
+                                    },
+                                    "type": "object"
+                                }
+                            }
+                        }
+                    }
+                }
+            }
+        },
+        "/sales/{id}": {
+            "get": {
+                "tags": [
+                    "sales"
+                ],
+                "summary": "Получение одной продажи",
+                "description": "Получение одной продажи",
+                "operationId": "02d389d8a336b4b9ba95512cc271ebf0",
+                "parameters": [
+                    {
+                        "parameter": "id",
+                        "name": "id",
+                        "in": "query",
+                        "description": "Идентификатор автора",
+                        "required": true,
+                        "deprecated": false,
+                        "allowEmptyValue": true
+                    }
+                ],
+                "responses": {
+                    "200": {
+                        "description": "Успешно",
+                        "content": {
+                            "application/json": {
+                                "schema": {
+                                    "properties": {
+                                        "status": {
+                                            "type": "string",
+                                            "format": "string",
+                                            "example": "Successfully"
+                                        },
+                                        "data": {
+                                            "properties": {
+                                                "id": {
+                                                    "type": "integer",
+                                                    "format": "int",
+                                                    "example": "1"
+                                                },
+                                                "book_id": {
+                                                    "type": "integer",
+                                                    "format": "int",
+                                                    "example": "1"
+                                                },
+                                                "client_id": {
+                                                    "type": "integer",
+                                                    "format": "int",
+                                                    "example": "1"
+                                                },
+                                                "price": {
+                                                    "type": "number",
+                                                    "format": "float",
+                                                    "example": "1.2"
+                                                },
+                                                "created_at": {
+                                                    "type": "string",
+                                                    "format": "TIMESTAMP",
+                                                    "example": "2025-06-22T09:02:11.000000Z"
+                                                }
+                                            },
+                                            "type": "object"
+                                        }
+                                    },
+                                    "type": "object"
+                                }
+                            }
+                        }
+                    }
+                }
+            },
+            "put": {
+                "tags": [
+                    "sales"
+                ],
+                "summary": "Изменение данных продажи",
+                "description": "Изменение данных продажи",
+                "operationId": "cdd0f5c3f0cfc045ebd56b2f6dba09f9",
+                "parameters": [
+                    {
+                        "parameter": "id",
+                        "name": "id",
+                        "in": "query",
+                        "description": "Идентификатор автора",
+                        "required": true,
+                        "deprecated": false,
+                        "allowEmptyValue": true
+                    }
+                ],
+                "requestBody": {
+                    "required": true,
+                    "content": {
+                        "application/json": {
+                            "schema": {
+                                "properties": {
+                                    "name": {
+                                        "type": "string",
+                                        "format": "name",
+                                        "example": "Oleg"
+                                    },
+                                    "email": {
+                                        "type": "string",
+                                        "format": "email",
+                                        "example": "Oleg@mail"
+                                    }
+                                },
+                                "type": "object"
+                            }
+                        }
+                    }
+                },
+                "responses": {
+                    "200": {
+                        "description": "Успешно",
+                        "content": {
+                            "application/json": {
+                                "schema": {
+                                    "properties": {
+                                        "status": {
+                                            "type": "string",
+                                            "format": "string",
+                                            "example": "Successfully"
+                                        },
+                                        "data": {
+                                            "type": "array",
+                                            "items": {
+                                                "properties": {
+                                                    "id": {
+                                                        "type": "integer",
+                                                        "format": "int",
+                                                        "example": "1"
+                                                    },
+                                                    "book_id": {
+                                                        "type": "integer",
+                                                        "format": "int",
+                                                        "example": "1"
+                                                    },
+                                                    "client_id": {
+                                                        "type": "integer",
+                                                        "format": "int",
+                                                        "example": "1"
+                                                    },
+                                                    "price": {
+                                                        "type": "number",
+                                                        "format": "float",
+                                                        "example": "1.2"
+                                                    },
+                                                    "created_at": {
+                                                        "type": "string",
+                                                        "format": "TIMESTAMP",
+                                                        "example": "2025-06-22T09:02:11.000000Z"
+                                                    }
+                                                },
+                                                "type": "object"
+                                            }
+                                        }
+                                    },
+                                    "type": "object"
+                                }
+                            }
+                        }
+                    }
+                }
+            },
+            "delete": {
+                "tags": [
+                    "sales"
+                ],
+                "summary": "Удаление продажи",
+                "description": "Удаление продажи",
+                "operationId": "30ff6856ef09b8ec7f6b18ed7234eb44",
+                "parameters": [
+                    {
+                        "parameter": "id",
+                        "name": "id",
+                        "in": "query",
+                        "description": "Идентификатор автора",
+                        "required": true,
+                        "deprecated": false,
+                        "allowEmptyValue": true
+                    }
+                ],
+                "responses": {
+                    "200": {
+                        "description": "Успешно"
+                    }
+                }
+            }
+        },
+        "/user/signup": {
+            "post": {
+                "tags": [
+                    "user"
+                ],
+                "summary": "Регистрагия пользователя",
+                "description": "Регистрагия пользователя",
+                "operationId": "06a2a9fc67fdee725b42fdae9bae69b3",
+                "requestBody": {
+                    "required": true,
+                    "content": {
+                        "application/json": {
+                            "schema": {
+                                "properties": {
+                                    "name": {
+                                        "type": "string",
+                                        "format": "name",
+                                        "example": "Oleg"
+                                    },
+                                    "email": {
+                                        "type": "string",
+                                        "format": "email",
+                                        "example": "Oleg@mail.ru"
+                                    },
+                                    "password": {
+                                        "type": "string",
+                                        "format": "password",
+                                        "example": "23455"
+                                    }
+                                },
+                                "type": "object"
+                            }
+                        }
+                    }
+                },
+                "responses": {
+                    "200": {
+                        "description": "Успешно",
+                        "content": {
+                            "application/json": {
+                                "schema": {
+                                    "properties": {
+                                        "status": {
+                                            "type": "string",
+                                            "format": "string",
+                                            "example": "Successfully"
+                                        },
+                                        "data": {
+                                            "type": "array",
+                                            "items": {
+                                                "properties": {
+                                                    "token": {
+                                                        "type": "string",
+                                                        "format": "JWT",
+                                                        "example": "Fk32aopIeVO5KKgVu27FYwQMwE3"
+                                                    },
+                                                    "user": {
+                                                        "properties": {
+                                                            "id": {
+                                                                "type": "integer",
+                                                                "format": "int",
+                                                                "example": "1"
+                                                            },
+                                                            "name": {
+                                                                "type": "string",
+                                                                "format": "name",
+                                                                "example": "Oleg"
+                                                            },
+                                                            "email": {
+                                                                "type": "string",
+                                                                "format": "email",
+                                                                "example": "Oleg@mail.ru"
+                                                            },
+                                                            "email_verified_at": {
+                                                                "type": "string",
+                                                                "format": "TIMESTAMP",
+                                                                "example": "2025-06-21T12:56:45.000000Z"
+                                                            },
+                                                            "created_at": {
+                                                                "type": "string",
+                                                                "format": "TIMESTAMP",
+                                                                "example": "2025-06-21T12:56:45.000000Z"
+                                                            },
+                                                            "updated_at": {
+                                                                "type": "string",
+                                                                "format": "TIMESTAMP",
+                                                                "example": "2025-06-21T12:56:45.000000Z"
+                                                            }
+                                                        },
+                                                        "type": "object"
+                                                    }
+                                                },
+                                                "type": "object"
+                                            }
+                                        }
+                                    },
+                                    "type": "object"
+                                }
+                            }
+                        }
+                    }
+                }
+            }
+        },
+        "/user/signin": {
+            "post": {
+                "tags": [
+                    "user"
+                ],
+                "summary": "Получение токена пользователя",
+                "description": "Получение токена пользователя",
+                "operationId": "250323879ca6c05172cbec88ed87bd38",
+                "requestBody": {
+                    "required": true,
+                    "content": {
+                        "application/json": {
+                            "schema": {
+                                "properties": {
+                                    "email": {
+                                        "type": "string",
+                                        "format": "email",
+                                        "example": "Oleg@mail.ru"
+                                    },
+                                    "password": {
+                                        "type": "string",
+                                        "format": "password",
+                                        "example": "23455"
+                                    }
+                                },
+                                "type": "object"
+                            }
+                        }
+                    }
+                },
+                "responses": {
+                    "200": {
+                        "description": "Успешно",
+                        "content": {
+                            "application/json": {
+                                "schema": {
+                                    "properties": {
+                                        "status": {
+                                            "type": "string",
+                                            "format": "string",
+                                            "example": "Successfully"
+                                        },
+                                        "data": {
+                                            "type": "array",
+                                            "items": {
+                                                "properties": {
+                                                    "token": {
+                                                        "type": "string",
+                                                        "format": "JWT",
+                                                        "example": "Fk32aopIeVO5KKgVu27FYwQMwE3"
+                                                    },
+                                                    "user": {
+                                                        "properties": {
+                                                            "id": {
+                                                                "type": "integer",
+                                                                "format": "int",
+                                                                "example": "1"
+                                                            },
+                                                            "name": {
+                                                                "type": "string",
+                                                                "format": "name",
+                                                                "example": "Oleg"
+                                                            },
+                                                            "email": {
+                                                                "type": "string",
+                                                                "format": "email",
+                                                                "example": "Oleg@mail.ru"
+                                                            },
+                                                            "email_verified_at": {
+                                                                "type": "string",
+                                                                "format": "TIMESTAMP",
+                                                                "example": "2025-06-21T12:56:45.000000Z"
+                                                            },
+                                                            "created_at": {
+                                                                "type": "string",
+                                                                "format": "TIMESTAMP",
+                                                                "example": "2025-06-21T12:56:45.000000Z"
+                                                            },
+                                                            "updated_at": {
+                                                                "type": "string",
+                                                                "format": "TIMESTAMP",
+                                                                "example": "2025-06-21T12:56:45.000000Z"
+                                                            }
+                                                        },
+                                                        "type": "object"
+                                                    }
+                                                },
+                                                "type": "object"
+                                            }
+                                        }
+                                    },
+                                    "type": "object"
+                                }
+                            }
+                        }
+                    },
+                    "401": {
+                        "description": "Ошибка"
+                    }
+                }
+            }
+        },
+        "/user": {
+            "post": {
+                "tags": [
+                    "user"
+                ],
+                "summary": "Поиск пользователя по имени",
+                "description": "Поиск пользователя по имени",
+                "operationId": "10551226e9bb607517f5e51dd4137ec2",
+                "requestBody": {
+                    "required": true,
+                    "content": {
+                        "application/json": {
+                            "schema": {
+                                "properties": {
+                                    "name": {
+                                        "type": "string",
+                                        "format": "name",
+                                        "example": "Oleg"
+                                    }
+                                },
+                                "type": "object"
+                            }
+                        }
+                    }
+                },
+                "responses": {
+                    "200": {
+                        "description": "Успешно",
+                        "content": {
+                            "application/json": {
+                                "schema": {
+                                    "properties": {
+                                        "status": {
+                                            "type": "string",
+                                            "format": "string",
+                                            "example": "Successfully"
+                                        },
+                                        "paginator": {
+                                            "$ref": "#/components/schemas/Paginator"
+                                        },
+                                        "data": {
+                                            "type": "array",
+                                            "items": {
+                                                "properties": {
+                                                    "id": {
+                                                        "type": "integer",
+                                                        "format": "int",
+                                                        "example": "1"
+                                                    },
+                                                    "name": {
+                                                        "type": "string",
+                                                        "format": "name",
+                                                        "example": "Oleg"
+                                                    },
+                                                    "email": {
+                                                        "type": "string",
+                                                        "format": "email",
+                                                        "example": "Oleg@mail.ru"
+                                                    },
+                                                    "email_verified_at": {
+                                                        "type": "string",
+                                                        "format": "TIMESTAMP",
+                                                        "example": "2025-06-21T12:56:45.000000Z"
+                                                    },
+                                                    "created_at": {
+                                                        "type": "string",
+                                                        "format": "TIMESTAMP",
+                                                        "example": "2025-06-21T12:56:45.000000Z"
+                                                    },
+                                                    "updated_at": {
+                                                        "type": "string",
+                                                        "format": "TIMESTAMP",
+                                                        "example": "2025-06-21T12:56:45.000000Z"
+                                                    }
+                                                },
+                                                "type": "object"
+                                            }
+                                        }
+                                    },
+                                    "type": "object"
+                                }
+                            }
+                        }
+                    },
+                    "401": {
+                        "description": "Ошибка"
+                    }
+                }
+            }
+        },
+        "/user/current": {
+            "post": {
+                "tags": [
+                    "user"
+                ],
+                "summary": "Получение данных текущего пользователя",
+                "description": "Получение данных текущего пользователя",
+                "operationId": "1fb50582c8fed6ca431bf9eb4fc249af",
+                "responses": {
+                    "200": {
+                        "description": "Успешно",
+                        "content": {
+                            "application/json": {
+                                "schema": {
+                                    "properties": {
+                                        "status": {
+                                            "type": "string",
+                                            "format": "string",
+                                            "example": "Successfully"
+                                        },
+                                        "data": {
+                                            "properties": {
+                                                "id": {
+                                                    "type": "integer",
+                                                    "format": "int",
+                                                    "example": "1"
+                                                },
+                                                "name": {
+                                                    "type": "string",
+                                                    "format": "name",
+                                                    "example": "Oleg"
+                                                },
+                                                "email": {
+                                                    "type": "string",
+                                                    "format": "email",
+                                                    "example": "Oleg@mail.ru"
+                                                },
+                                                "email_verified_at": {
+                                                    "type": "string",
+                                                    "format": "TIMESTAMP",
+                                                    "example": "2025-06-21T12:56:45.000000Z"
+                                                },
+                                                "created_at": {
+                                                    "type": "string",
+                                                    "format": "TIMESTAMP",
+                                                    "example": "2025-06-21T12:56:45.000000Z"
+                                                },
+                                                "updated_at": {
+                                                    "type": "string",
+                                                    "format": "TIMESTAMP",
+                                                    "example": "2025-06-21T12:56:45.000000Z"
+                                                }
+                                            },
+                                            "type": "object"
+                                        }
+                                    },
+                                    "type": "object"
+                                }
+                            }
+                        }
+                    }
+                }
+            }
+        },
+        "/user/logout": {
+            "post": {
+                "tags": [
+                    "user"
+                ],
+                "summary": "Сброс аутентификации",
+                "description": "Сброс аутентификации",
+                "operationId": "865d0867b8d1a7c61b2ac92101ea979a",
+                "responses": {
+                    "200": {
+                        "description": "Успешно"
+                    }
+                }
+            }
+        }
+    },
+    "components": {
+        "schemas": {
+            "Paginator": {
+                "properties": {
+                    "current_page": {
+                        "type": "integer",
+                        "format": "int",
+                        "example": "1"
+                    },
+                    "first_page_url": {
+                        "type": "string",
+                        "format": "url",
+                        "example": "http://138.124.55.208/api/prod/chat?page=1"
+                    },
+                    "from": {
+                        "type": "integer",
+                        "format": "int",
+                        "example": "1"
+                    },
+                    "last_page": {
+                        "type": "integer",
+                        "format": "int",
+                        "example": "380"
+                    },
+                    "last_page_url": {
+                        "type": "string",
+                        "format": "url",
+                        "example": "http://138.124.55.208/api/prod/chat?page=5"
+                    },
+                    "next_page_url": {
+                        "type": "string",
+                        "format": "url",
+                        "example": "http://138.124.55.208/api/prod/chat?page=3"
+                    },
+                    "path": {
+                        "type": "string",
+                        "format": "url",
+                        "example": "http://138.124.55.208/api/prod/chat?page=2"
+                    },
+                    "per_page": {
+                        "type": "integer",
+                        "format": "int",
+                        "example": "30"
+                    },
+                    "to": {
+                        "type": "integer",
+                        "format": "int",
+                        "example": "30"
+                    },
+                    "total": {
+                        "type": "integer",
+                        "format": "int",
+                        "example": "11371"
+                    }
+                },
+                "type": "object"
+            }
+        }
+    },
+    "tags": [
+        {
+            "name": "authors",
+            "description": "authors"
+        },
+        {
+            "name": "books",
+            "description": "books"
+        },
+        {
+            "name": "buyers",
+            "description": "buyers"
+        },
+        {
+            "name": "sales",
+            "description": "sales"
+        },
+        {
+            "name": "user",
+            "description": "user"
+        }
+    ]
+}

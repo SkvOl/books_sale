@@ -4,6 +4,7 @@ namespace App\Http;
 
 
 use Illuminate\Pagination\LengthAwarePaginator;
+use OpenApi\Attributes as OAT;
 
 trait Response{
     /**
@@ -15,6 +16,22 @@ trait Response{
         'Access-Control-Allow-Credentials' => 'true',
     ];
 
+
+    #[OAT\Schema(
+        schema: 'Paginator',
+        properties: [
+            new OAT\Property(property: 'current_page', type: 'int', format: 'int', example: '1'),
+            new OAT\Property(property: 'first_page_url', type: 'string', format: 'url', example: 'http://138.124.55.208/api/prod/chat?page=1'),
+            new OAT\Property(property: 'from', type: 'int', format: 'int', example: '1'),
+            new OAT\Property(property: 'last_page', type: 'int', format: 'int', example: '380'),
+            new OAT\Property(property: 'last_page_url', type: 'string', format: 'url', example: 'http://138.124.55.208/api/prod/chat?page=5'),
+            new OAT\Property(property: 'next_page_url', type: 'string', format: 'url', example: 'http://138.124.55.208/api/prod/chat?page=3'),
+            new OAT\Property(property: 'path', type: 'string', format: 'url', example: 'http://138.124.55.208/api/prod/chat?page=2'),
+            new OAT\Property(property: 'per_page', type: 'int', format: 'int', example: '30'),
+            new OAT\Property(property: 'to', type: 'int', format: 'int', example: '30'),
+            new OAT\Property(property: 'total', type: 'int', format: 'int', example: '11371'),
+        ]
+    )]
     static function toPaginator($response, $status)
     {
         return array_map(
