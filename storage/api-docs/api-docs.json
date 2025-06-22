@@ -2,7 +2,7 @@
     "openapi": "3.0.0",
     "info": {
         "title": "Book sale",
-        "description": "Простой сервис по пробаже книг",
+        "description": "Простой сервис по продаже книг",
         "version": "1"
     },
     "paths": {

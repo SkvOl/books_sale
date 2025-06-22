@@ -42,7 +42,9 @@ window.onload = () => {
                     row += `<td>${data.book[key]}</td>`;
                 }
             }
-
+            
+            row += `<td><button type="button" class="btn btn-success sale" data-id="${id}">Купить</button></td>`;
+            
             elem.innerHTML = row;
         });
         
@@ -55,6 +57,8 @@ window.onload = () => {
                     row += `<td>${data.book[key]}</td>`;
                 }
             }
+            
+            row += `<td><button type="button" class="btn btn-success sale" data-id="${id}">Купить</button></td>`;
 
             elem.innerHTML = row;
         });
@@ -87,6 +91,7 @@ window.onload = () => {
                         col += `<td>${row[key]}</td>`;
                     }
                 }
+                if(entity == 'books') col += `<td><button type="button" class="btn btn-success sale" data-id="${id}">Купить</button></td>`;
 
                 if (col != '') rows += `<tr class = "entry-${id}">${col}</tr>`;
 
@@ -178,7 +183,10 @@ window.onload = () => {
         else if(elem.closest('.filter')){
             let data = makeData();       
             
-            load(entity, data, ['authors']);
+            load(entity, data, ['authors', 'sales_count']);
+        }
+        else if(elem.closest('.sale')){
+            request({}, `/api/books/${elem.dataset.id}/buy`, res => {}, 'POST');
         }
     });
 };
