@@ -25,7 +25,7 @@ class SaleFactory extends Factory
         return [
             'book_id' => $book_id,
             'client_id' => fake()->numberBetween(1, 1000),
-            'price' => $book->price,
+            'price' => $book->price ?? 100,
         ];
     }
 }
