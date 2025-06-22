@@ -20,4 +20,24 @@ class Book extends Model{
     {
         return $this->belongsToMany(Author::class);
     }
+    
+    public function authors_popular(): BelongsToMany
+    {
+        return $this->authors()->where('rank', '>=', '75');
+    }
+
+    public function authors_with_photo(): BelongsToMany
+    {
+        return $this->authors()->whereNotNull('avatar_url');
+    }
+
+    public function sales(): HasMany
+    {
+        return $this->hasMany(Sale::class);
+    }
+
+    public function book_popular_today(): HasMany
+    {
+        return $this->sales()->whereDate('created_at', date('Y-m-d 00:00:00'))->groupBy('book_id')->havingRaw('COUNT(sales.id) > ?', [3]);
+    }
 }
