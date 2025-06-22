@@ -28,9 +28,6 @@ RUN docker-php-ext-install gd
 
 RUN curl -sS https://getcomposer.org/installer | php -- --install-dir=/usr/local/bin --filename=composer
 
-
-COPY . /var/www/books_sale
-
 #
 # RUN cd /var/www/ && composer create-project laravel/laravel:^11.0 books_sale
 # RUN cd /var/www/books_sale &&  \
@@ -45,10 +42,12 @@ COPY . /var/www/books_sale
 #     composer require yajra/laravel-datatables-oracle:"^11"
 #
 
-RUN apt-get install -y nodejs npm 
-RUN npm install vite@latest --save-dev && npm run build \
-&& npm run build && npm i pusher-js && npm i laravel-echo
+# RUN apt-get install -y nodejs npm
+# RUN npm install vite@latest --save-dev && npm run build \
+# && npm run build && npm i pusher-js && npm i laravel-echo
 
+
+COPY . /var/www/books_sale
 
 RUN apt-get clean && rm -rf /var/lib/apt/lists/*
 

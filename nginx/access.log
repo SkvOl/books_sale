@@ -1,2 +1,5 @@
 2025/06/22 06:37:43 [error] 21#21: *1 connect() failed (111: Connection refused) while connecting to upstream, client: 172.25.0.1, server: , request: "GET / HTTP/1.1", upstream: "fastcgi://172.25.0.4:9000", host: "127.0.0.1"
 2025/06/22 06:37:43 [error] 23#23: *3 connect() failed (111: Connection refused) while connecting to upstream, client: 172.25.0.1, server: , request: "GET /.well-known/appspecific/com.chrome.devtools.json HTTP/1.1", upstream: "fastcgi://172.25.0.4:9000", host: "127.0.0.1"
+2025/06/22 07:18:38 [error] 20#20: *1 connect() failed (111: Connection refused) while connecting to upstream, client: 172.25.0.1, server: , request: "GET / HTTP/1.1", upstream: "fastcgi://172.25.0.2:9000", host: "127.0.0.1"
+2025/06/22 07:18:39 [error] 20#20: *1 connect() failed (111: Connection refused) while connecting to upstream, client: 172.25.0.1, server: , request: "GET / HTTP/1.1", upstream: "fastcgi://172.25.0.2:9000", host: "127.0.0.1"
+2025/06/22 07:18:39 [error] 20#20: *1 connect() failed (111: Connection refused) while connecting to upstream, client: 172.25.0.1, server: , request: "GET / HTTP/1.1", upstream: "fastcgi://172.25.0.2:9000", host: "127.0.0.1"
