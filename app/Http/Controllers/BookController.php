@@ -173,6 +173,7 @@ class BookController extends Controller{
 
         $book->fill($request->only(['title', 'description', 'cover_url', 'price', 'quantity']));
         $book->save();
+        event(new BookUpdateEvent($book));
 
         return self::response($book->toArray());
     }
@@ -282,6 +283,8 @@ class BookController extends Controller{
                 'client_id' => $user->id,
                 'price'     => $book->price
             ]);
+
+            event(new SaleEvent($book));
         });
 
         return self::response([]);
