@@ -1,0 +1,68 @@
+services:
+  books_sale:
+    build:
+      context: .
+      dockerfile: Dockerfile
+    container_name: books_sale
+    restart: unless-stopped
+    tty: true
+    environment:
+      SERVICE_NAME: books_sale
+      SERVICE_TAGS: dev
+    working_dir: '/var/www/books_sale'
+    depends_on:
+      - db
+    volumes: 
+      - '.:/var/www/books_sale'
+    ports:
+      - 9001:9001
+    networks:
+      - books_sale-net
+
+  books_sale_webserver:
+    image: nginx:alpine
+    container_name: books_sale_webserver
+    restart: unless-stopped
+    tty: true
+    depends_on:
+      - books_sale
+    ports:
+      - "80:80"
+    volumes:
+      - '.:/var/www/books_sale'
+      - './nginx:/etc/nginx/conf.d'
+    networks:
+      - books_sale-net
+
+  db:
+    image: mariadb:10.11
+    restart: always
+    environment:
+      MYSQL_ROOT_PASSWORD: SkvOl9
+    container_name: db
+    ports:
+      - 3306:3306
+    networks:
+      books_sale-net:
+        ipv4_address: 172.25.0.3
+
+  phpmyadmin:
+    image: phpmyadmin
+    restart: always
+    container_name: phpmyadmin
+    depends_on:
+      - db
+    ports:
+      - 81:80
+    environment:
+      - PMA_ARBITRARY=1
+    networks:
+      - 'books_sale-net'
+
+networks:
+  books_sale-net:
+    driver: bridge
+    ipam:
+      config:
+        - subnet: 172.25.0.0/16
+          gateway: 172.25.0.1
